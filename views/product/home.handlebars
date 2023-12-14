@@ -1,0 +1,73 @@
+<main class="main">
+  <!-- Button trigger modal -->
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+  >
+    Adicionar Produto
+  </button>
+  <ul class="list-group list-group-flush">
+    {{#each products}}
+    <li class="list-group-item">
+      <p>{{this.nome}}<span>Quantidade: {{this.quantidade}}</span></p>
+      <div class="actions">
+        <form action="/product/{{this.id}}" method="post">
+          <button type="submit" class="btn btn-info">Editar</button>
+        </form>
+        <form action="/product/remove" method="post">
+            <input type="hidden" name="id" value="{{this.id}}">
+            <button type="submit" class="btn btn-danger">Excluir</button>
+        </form>
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+</main>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar produto</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form action="/product/add" method="post">
+          <div class="mb-3">
+            <label for="nome" class="form-label">Nome Produto</label>
+            <input
+              type="text"
+              class="form-control"
+              name="nome"
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="quantidade"
+              class="form-label"
+            >Quantidade</label>
+            <input
+              type="text"
+              class="form-control"
+              name="quantidade"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
